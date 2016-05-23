@@ -36,7 +36,6 @@ import Net.GankUrl;
 public class DetailActivity extends AppCompatActivity {
    private WebView webView;
    private NumberProgressBar progressBar;
-    @TargetApi(Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +64,7 @@ public class DetailActivity extends AppCompatActivity {
         CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         ImageView mImage = (ImageView) findViewById(R.id.Image);
         collapsingToolbar.setTitle(dataResults.getType());
-        collapsingToolbar.setExpandedTitleColor(getColor(R.color.accent));
+        collapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.accent));
         String url = meiziResults.getUrl();
 
         //加载头部图片
@@ -80,19 +79,11 @@ public class DetailActivity extends AppCompatActivity {
         webView= (WebView) findViewById(R.id.webView);
         progressBar= (NumberProgressBar) findViewById(R.id.progressbar);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(dataResults.getUrl());
         webView.setWebChromeClient(new MyWebChromeClient());
         webView.setWebViewClient(new MyWebClient());
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webSettings.setAllowFileAccess(true);
-        webSettings.setDatabaseEnabled(true);
-        webSettings.setDomStorageEnabled(true);
-        webSettings.setSaveFormData(false);
-        webSettings.setAppCacheEnabled(true);
-        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        webSettings.setLoadWithOverviewMode(false);
-        webSettings.setUseWideViewPort(true);
+        webView.loadUrl(dataResults.getUrl());
 
         //设置返回导航按钮
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
